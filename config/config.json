@@ -1,0 +1,19 @@
+{
+  "path": {
+    "srcDir": "src/",
+    "distDir": "dist/",
+
+    "sassSrcDir": "sass/",
+    "cssSrcDir": "css/",
+    "cssDistDir": "css/",
+    "cssDistFile": "index.css",
+
+    "jsSrcDir": "js/",
+    "jsDistDir": "js/",
+
+    "imgSrcDir": "img/",
+    "imgDistDir": "img/",
+
+    "serverPath": "src/"
+  }
+}
