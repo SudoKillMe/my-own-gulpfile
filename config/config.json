@@ -1,19 +1,23 @@
 {
   "path": {
     "srcDir": "src/",
-    "distDir": "dist/",
+    "distAssetsDir": "dist/",
+    "distHtmlDir": "dist/",
 
     "sassSrcDir": "sass/",
     "cssSrcDir": "css/",
     "cssDistDir": "css/",
-    "cssDistFile": "index.css",
 
     "jsSrcDir": "js/",
     "jsDistDir": "js/",
 
-    "imgSrcDir": "img/",
-    "imgDistDir": "img/",
+    "imgSrcDir": "images/",
+    "imgDistDir": "images/",
 
     "serverPath": "src/"
+  },
+  "name": {
+    "sprite": "sprite",
+    "cssDist": "index.css"
   }
 }

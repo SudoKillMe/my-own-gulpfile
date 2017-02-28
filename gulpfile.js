@@ -15,13 +15,22 @@
  */
 var gulp = require( 'gulp' ),
     path = require( 'path' ),
+    sequence = require( 'gulp-sequence' ),
     cssTask = require( './tasks/css' ),
     htmlTask = require( './tasks/html' ),
+    imgTask = require( './tasks/image' ),
+    cleanTask = require( './tasks/clean' ),
     serveTask = require( './tasks/serve' );
 
 gulp.task( 'serve', serveTask.startServer );
-//
+
+gulp.task( 'image', imgTask.image );
+
 gulp.task( 'css', cssTask.css );
+
+gulp.task( 'bundleCss', cssTask.bundleCSS );
+
+gulp.task( 'build', sequence( 'clean', 'image', [ 'bundleHtml', 'bundleCss', 'bundleScript' ], 'bundleTest' ) );
 
 gulp.task( 'html', htmlTask.html );
 // gulp.task( 'js', jsTask.js );

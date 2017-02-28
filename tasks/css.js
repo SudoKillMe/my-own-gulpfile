@@ -15,10 +15,10 @@ var gulp = require( 'gulp' ),
 module.exports.css = function () {
 
     var processors = [
-        autoprefixer({ browsers: ['last 2 version'] }),
-        assets({ loadPaths: ['src/images/'] }),
-        sprites({ stylesheetPath: 'src/css/', spritePath: 'src/images' }),
-        cssnano
+        //autoprefixer({ browsers: ['last 2 version'] }),
+        assets({ loadPaths: ['images/'], basePath: 'src/' }),
+        //sprites({ stylesheetPath: 'src/css/', spritePath: 'src/images' }),
+        //cssnano
     ];
 
     return gulp.src(
@@ -34,12 +34,22 @@ module.exports.css = function () {
 
 module.exports.bundleCSS = function () {
 
+    var processors = [
+        autoprefixer({ browsers: ['last 2 version'] }),
+        //assets({ loadPaths: ['images/'], basePath: 'dist/' }),
+        assets({ loadPaths: ['images/'], basePath: 'dist/' }),
+        sprites({ stylesheetPath: 'dist/css/', spritePath: 'dist/images' }),
+        cssnano
+    ];
+
     return gulp.src(
-        path.join( config.path.srcDir, config.path.cssSrcDir, '**/*.css' )
+        path.join( config.path.srcDir, config.path.sassSrcDir, '**/*.{scss,css,sass}' )
         )
-        .pipe( concat( config.path.cssDistFile ) )
+        .pipe( sass() )
+        .pipe( postcss( processors ) )
+        .pipe( concat( config.name.cssDist ) )
         .pipe( gulp.dest(
-            path.join( config.path.distDir, config.path.cssDistDir )
+            path.join( config.path.distAssetsDir, config.path.cssDistDir )
         ) );
 
 }

@@ -38,7 +38,6 @@ module.exports.startServer = function () {
 
 }
 
+module.exports.bundleTest = function () {
 
-module.exports.getServer = function () {
-    return bs;
 }
