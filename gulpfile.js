@@ -16,11 +16,12 @@
 var gulp = require( 'gulp' ),
     path = require( 'path' ),
     sequence = require( 'gulp-sequence' ),
+    serveTask = require( './tasks/serve' ),
     cssTask = require( './tasks/css' ),
     htmlTask = require( './tasks/html' ),
     imgTask = require( './tasks/image' ),
-    cleanTask = require( './tasks/clean' ),
-    serveTask = require( './tasks/serve' );
+    scriptTask = require( './tasks/script' ),
+    cleanTask = require( './tasks/clean' );
 
 gulp.task( 'serve', serveTask.startServer );
 
@@ -30,9 +31,19 @@ gulp.task( 'css', cssTask.css );
 
 gulp.task( 'bundleCss', cssTask.bundleCSS );
 
-gulp.task( 'build', sequence( 'clean', 'image', [ 'bundleHtml', 'bundleCss', 'bundleScript' ], 'bundleTest' ) );
+gulp.task( 'script', scriptTask.script );
+
+gulp.task( 'bundleScript', scriptTask.bundleScript );
+
+gulp.task( 'clean', cleanTask.clean );
+
+gulp.task( 'bundleTest', serveTask.bundleTest );
+
+gulp.task( 'build', sequence( 'clean', 'image', [ 'bundleCss', 'bundleScript' ], 'bundleHtml', 'bundleTest' ) );
 
 gulp.task( 'html', htmlTask.html );
+
+gulp.task( 'bundleHtml', htmlTask.bundleHtml );
 // gulp.task( 'js', jsTask.js );
 // gulp.task( 'img', imgTask.img );
 // gulp.task( 'html', htmlTask.html );

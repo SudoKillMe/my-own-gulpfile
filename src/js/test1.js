@@ -1,4 +1,9 @@
 /**
  * Created by techerlang on 2017/2/28.
  */
-alert( 'fuck you' );
+var test = function () {
+
+    var d = document.querySelector( '.test' );
+    d.innerHTML = 'fuck';
+
+}

@@ -8,7 +8,7 @@ var gulp = require( 'gulp' ),
 
 module.exports.clean = function () {
 
-    return gulp.src( config.path.distDir )
+    return gulp.src( [config.path.distAssetsDir, config.path.distHtmlDir] )
         .pipe( clean() );
 
 }

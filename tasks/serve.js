@@ -39,5 +39,9 @@ module.exports.startServer = function () {
 }
 
 module.exports.bundleTest = function () {
-
+    bs.init( {
+        server: {
+            baseDir: 'dist'
+        }
+    } );
 }

@@ -18,6 +18,7 @@
   },
   "name": {
     "sprite": "sprite",
-    "cssDist": "index.css"
+    "cssDist": "index.css",
+    "jsDist": "index.js"
   }
 }
