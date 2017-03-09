@@ -21,12 +21,11 @@ module.exports.watchTask = function () {
     ).on( 'change', bs.reload );
 
     gulp.watch(
-        path.join( config.path.srcDir, config.path.imgSrcDir, '**/*.{png,jpeg,jpg,gif}' ),
-        bs.reload
-    );
+        path.join( config.path.srcDir, config.path.imgSrcDir, '**/*.{png,jpeg,jpg,gif}' )
+    ).on( 'change', bs.reload );
 
     gulp.watch(
         path.join( config.path.srcDir, '**/*.html' )
-    );
+    ).on( 'change', bs.reload );
 
 }

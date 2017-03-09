@@ -23,34 +23,27 @@ var gulp = require( 'gulp' ),
     scriptTask = require( './tasks/script' ),
     cleanTask = require( './tasks/clean' );
 
-gulp.task( 'serve', serveTask.startServer );
-
 gulp.task( 'image', imgTask.image );
+
+gulp.task( 'bundleImage', imgTask.bundleImage );
 
 gulp.task( 'css', cssTask.css );
 
-gulp.task( 'bundleCss', cssTask.bundleCSS );
+gulp.task( 'bundleCss', cssTask.bundleCss );
 
 gulp.task( 'script', scriptTask.script );
 
 gulp.task( 'bundleScript', scriptTask.bundleScript );
 
+gulp.task( 'html', htmlTask.html );
+
+gulp.task( 'bundleHtml', htmlTask.bundleHtml );
+
 gulp.task( 'clean', cleanTask.clean );
 
 gulp.task( 'bundleTest', serveTask.bundleTest );
 
-gulp.task( 'build', sequence( 'clean', 'image', [ 'bundleCss', 'bundleScript' ], 'bundleHtml', 'bundleTest' ) );
+gulp.task( 'serve', [ 'css' ], serveTask.startServer );
 
-gulp.task( 'html', htmlTask.html );
+gulp.task( 'build', sequence( 'clean', 'bundleImage', [ 'bundleCss', 'bundleScript' ], 'bundleHtml', 'bundleTest' ) );
 
-gulp.task( 'bundleHtml', htmlTask.bundleHtml );
-// gulp.task( 'js', jsTask.js );
-// gulp.task( 'img', imgTask.img );
-// gulp.task( 'html', htmlTask.html );
-//
-// gulp.task( 'clean', cleanTask.clean );
-// gulp.task( 'build', buildTask.build );
-// var server = require( './tasks/serve' ).getServer();
-
-// var b = require( 'browser-sync' ).get( 'fuck' );
-// console.log( server );

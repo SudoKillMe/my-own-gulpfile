@@ -19,6 +19,12 @@ module.exports.image = function () {
 
 module.exports.bundleImage = function () {
 
-
+    return gulp.src(
+            path.join( config.path.srcDir, config.path.imgSrcDir, '**/*.{jpg,jpeg,png,gif}' )
+        )
+        //.pipe( imagemin() )
+        .pipe( gulp.dest(
+            path.join( config.path.distAssetsDir, config.path.imgDistDir )
+        ) );
 
 }

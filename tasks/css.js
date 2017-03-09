@@ -9,7 +9,12 @@ var gulp = require( 'gulp' ),
     autoprefixer = require( 'autoprefixer' ),
     assets = require( 'postcss-assets' ),
     sprites = require( 'postcss-sprites' ),
-    cssnano = require( 'cssnano' ),
+    //cssnano = require( 'cssnano' ),
+    cssnano = require( 'gulp-cssnano' ),
+    rename = require( 'gulp-rename' ),
+    notify = require( 'gulp-notify' ),
+    plumber = require( 'gulp-plumber' ),
+    combiner = require( 'stream-combiner2' ),
     config = require( '../config/config.json' );
 
 module.exports.css = function () {
@@ -24,22 +29,24 @@ module.exports.css = function () {
     return gulp.src(
         path.join( config.path.srcDir, config.path.sassSrcDir, '**/*.scss' )
         )
+        .pipe( plumber() )
         .pipe( sass() )
         .pipe( postcss( processors ) )
+        // .on( 'error', notify.onError('Error: <%= error.message %>') )
         .pipe( gulp.dest(
             path.join( config.path.srcDir, config.path.cssSrcDir )
         ) );
 
 }
 
-module.exports.bundleCSS = function () {
+module.exports.bundleCss = function () {
 
     var processors = [
         autoprefixer({ browsers: ['last 2 version'] }),
         //assets({ loadPaths: ['images/'], basePath: 'dist/' }),
         assets({ loadPaths: ['images/'], basePath: 'dist/' }),
-        sprites({ stylesheetPath: 'dist/css/', spritePath: 'dist/images' }),
-        cssnano
+        //sprites({ stylesheetPath: 'dist/css/', spritePath: 'dist/images' }),
+        //cssnano
     ];
 
     return gulp.src(
@@ -50,6 +57,12 @@ module.exports.bundleCSS = function () {
         .pipe( concat( config.name.cssDist ) )
         .pipe( gulp.dest(
             path.join( config.path.distAssetsDir, config.path.cssDistDir )
-        ) );
+        ) )
+        .pipe( rename({ suffix: '.min' }) )
+        .pipe( cssnano() )
+        .pipe( gulp.dest(
+            path.join( config.path.distAssetsDir, config.path.cssDistDir )
+        ) )
+
 
 }

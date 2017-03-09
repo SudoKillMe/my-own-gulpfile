@@ -18,7 +18,11 @@
   },
   "name": {
     "sprite": "sprite",
+
     "cssDist": "index.css",
-    "jsDist": "index.js"
+    "cssMinDist": "index.min.css",
+
+    "jsDist": "index.js",
+    "jsMinDist": "index.min.js"
   }
 }
