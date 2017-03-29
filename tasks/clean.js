@@ -11,7 +11,7 @@ var gulp = require( 'gulp' ),
 module.exports.clean = function () {
 
     var htmlFiles = getWillBeCleanedHtmlFiles();
-
+    console.log(htmlFiles);
     return gulp.src( [config.path.distAssetsDir].concat( htmlFiles ) )
         .pipe( clean() );
 

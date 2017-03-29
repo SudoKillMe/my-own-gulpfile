@@ -1,0 +1,23 @@
+
+@function px2rem ( $px ) {
+    @if (unitless($px)){
+        @return px2rem($px + 0px);
+    }
+    @else if (unit($px) == rem) {
+         @return $px;
+    }
+    @return ($px / $base_font_size) * 1rem;
+}
+
+@mixin font-dpr( $font_size ) {
+    font-size: $font_size / 2;
+
+    [data-dpr="2"] & {
+        font-size: $font_size;
+    }
+    
+    [data-dpr="3"] & {
+        font-size: $font_size * 1.5;
+    }
+}
+

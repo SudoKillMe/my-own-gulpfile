@@ -9,7 +9,7 @@ var gulp = require( 'gulp' ),
     autoprefixer = require( 'autoprefixer' ),
     assets = require( 'postcss-assets' ),
     sprites = require( 'postcss-sprites' ),
-    //cssnano = require( 'cssnano' ),
+    cssnano = require( 'cssnano' ),
     cssnano = require( 'gulp-cssnano' ),
     rename = require( 'gulp-rename' ),
     notify = require( 'gulp-notify' ),
@@ -30,9 +30,10 @@ module.exports.css = function () {
         path.join( config.path.srcDir, config.path.sassSrcDir, '**/*.scss' )
         )
         .pipe( plumber() )
-        .pipe( sass() )
+        .pipe( sass().on('error', sass.logError) )
         .pipe( postcss( processors ) )
         // .on( 'error', notify.onError('Error: <%= error.message %>') )
+        .pipe( concat( config.name.cssDist ) )
         .pipe( gulp.dest(
             path.join( config.path.srcDir, config.path.cssSrcDir )
         ) );
@@ -44,7 +45,7 @@ module.exports.bundleCss = function () {
     var processors = [
         autoprefixer({ browsers: ['last 2 version'] }),
         //assets({ loadPaths: ['images/'], basePath: 'dist/' }),
-        assets({ loadPaths: ['images/'], basePath: 'dist/' }),
+        assets({ loadPaths: ['images/'], basePath: config.path.distAssetsDir }),
         //sprites({ stylesheetPath: 'dist/css/', spritePath: 'dist/images' }),
         //cssnano
     ];
